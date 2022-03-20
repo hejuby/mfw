@@ -5,7 +5,7 @@ import RatioSetting from './components/RatioSetting';
 import ColorSetting from './components/ColorSetting';
 import ImageHandler from './components/ImageHandler';
 
-const App = () => {
+const App = (): JSX.Element => {
   const [inputImage, setImage]: [File | undefined, Function] = useState(undefined);
   const [wRatio, setWRatio]: [Number, Function] = useState(0);
   const [hRatio, setHRatio]: [Number, Function] = useState(0);

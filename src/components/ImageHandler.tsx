@@ -6,7 +6,7 @@ type ImageProps = {
   color: string | undefined,
 }
 
-const ImageHandler: FunctionComponent<ImageProps> = ({ image, ratio, color }) => {
+const ImageHandler= ({ image, ratio, color }: ImageProps) => {
   const ratioCaculate = (image: File, ratio: [Number, Number]) => {
 
   }
