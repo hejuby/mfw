@@ -14,3 +14,11 @@ h2, h3, h4 {
   width: 70%;
   height: 70%;
 }
+
+.number-input {
+  width: 50px;
+}
+
+p {
+  display: inline-block;
+}
