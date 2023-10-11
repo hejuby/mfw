@@ -21,7 +21,17 @@ function handleGenerateWallpaper() {
   const ctx = canvas.getContext("2d");
   ctx.drawImage(imageTag, 0, 0);
   imageTag.classList.add("hidden");
-  
+  if (newResolution[0] !== imageTag.width) {
+    const diff = newResolution[0] - imageTag.width;
+    ctx.fillRect(0, 0, Math.floor(diff/2), imageTag.height);
+    ctx.drawImage(imageTag, Math.floor(diff/2), 0); 
+    ctx.fillRect(Math.floor(diff/2)+imageTag.width, 0, Math.ceil(diff/2), imageTag.height);
+  } else {
+    const diff = newResolution[1] - imageTag.height;
+    ctx.fillRect(0, 0, imageTag.width, Math.floor(diff/2));
+    ctx.drawImage(imageTag, 0, Math.floor(diff/2));
+    ctx.fillRect(0, Math.floor(diff/2)+imageTag.height, imageTag.width, Math.ceil(diff/2));
+  }
 }
 
 function calcalateNewRatio(ratioWidth, ratioHeight, imageWidth, imageHeight) {
