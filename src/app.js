@@ -5,6 +5,7 @@ const widthInput = ratioColorWrapper.querySelector("#ratio-width");
 const heightInput = ratioColorWrapper.querySelector("#ratio-height");
 const colorInput = ratioColorWrapper.querySelector("#color");
 const wallpaperGenerateButton = document.querySelector("#wallpaper-generate");
+const downloadButton = document.querySelector("#download");
 
 function handleImageSubmit(event) {
   event.preventDefault();
@@ -21,17 +22,31 @@ function handleGenerateWallpaper() {
   const ctx = canvas.getContext("2d");
   ctx.drawImage(imageTag, 0, 0);
   imageTag.classList.add("hidden");
+  downloadButton.classList.remove("hidden");
   if (newResolution[0] !== imageTag.width) {
     const diff = newResolution[0] - imageTag.width;
+    ctx.fillStyle = colorInput.value;
     ctx.fillRect(0, 0, Math.floor(diff/2), imageTag.height);
     ctx.drawImage(imageTag, Math.floor(diff/2), 0); 
     ctx.fillRect(Math.floor(diff/2)+imageTag.width, 0, Math.ceil(diff/2), imageTag.height);
   } else {
     const diff = newResolution[1] - imageTag.height;
+    ctx.fillStyle = colorInput.value;
     ctx.fillRect(0, 0, imageTag.width, Math.floor(diff/2));
     ctx.drawImage(imageTag, 0, Math.floor(diff/2));
     ctx.fillRect(0, Math.floor(diff/2)+imageTag.height, imageTag.width, Math.ceil(diff/2));
   }
+}
+
+function handleImageDownload() {
+  const canvasURL = document.querySelector("canvas").toDataURL();
+  const downloadATag = document.createElement('a');
+  downloadATag.href = canvasURL;
+
+  downloadATag.download = "mfw";
+
+  downloadATag.click();
+  downloadATag.remove();
 }
 
 function calcalateNewRatio(ratioWidth, ratioHeight, imageWidth, imageHeight) {
@@ -48,3 +63,4 @@ function calcalateNewRatio(ratioWidth, ratioHeight, imageWidth, imageHeight) {
 
 imageInputForm.addEventListener("submit", handleImageSubmit);
 wallpaperGenerateButton.addEventListener("click", handleGenerateWallpaper);
+downloadButton.addEventListener("click", handleImageDownload);
