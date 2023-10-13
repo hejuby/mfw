@@ -1,9 +1,5 @@
 const imageInputForm = document.querySelector("#image-form");
 const imageTag = document.querySelector("#image");
-const ratioColorWrapper = document.querySelector("#ratio-color-wrapper");
-const widthInput = ratioColorWrapper.querySelector("#ratio-width");
-const heightInput = ratioColorWrapper.querySelector("#ratio-height");
-const colorInput = ratioColorWrapper.querySelector("#color");
 const wallpaperGenerateButton = document.querySelector("#wallpaper-generate");
 const downloadButton = document.querySelector("#download");
 
@@ -15,7 +11,14 @@ function handleImageSubmit(event) {
 }
 
 function handleGenerateWallpaper() {
+  const widthInput = document.querySelector("#ratio-width");
+  const heightInput = document.querySelector("#ratio-height");
+  const colorInput = document.querySelector("#color");
   const newResolution = calcalateNewRatio(Number(widthInput.value), Number(heightInput.value), imageTag.width, imageTag.height);
+  drawCanvas(newResolution, colorInput);
+}
+
+function drawCanvas(newResolution, colorInput) {
   const canvas = document.querySelector("canvas");
   canvas.width = newResolution[0];
   canvas.height = newResolution[1];
